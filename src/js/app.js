@@ -30,17 +30,50 @@ function render(variables = {}) {
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
   // reset the website body with the new html output
+  let name = `${variables.name}`;
+  if (variables.name === null) {
+    name = "Your name";
+  }
+  const {
+    lastname,
+    role,
+    twitter,
+    country,
+    city,
+    github,
+    linkedin,
+    instagram
+  } = variables;
+
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          <h1>${name}</h1>
+          <h2>${lastname ? lastname : "last name"}</h2>
+          <h3> ${role ? role : "role"}</h3>
+          <h3> ${country ? country : "Germany"}</h3>
+          <h3> ${city ? city : "Munich"}</h3>
+            <ul class="${variables.socialMediaPosition}">
+            ${
+              twitter
+                ? `<li><a href="https://twitter.com/${twitter}"><i class="fab fa-twitter"></i></a></li>`
+                : ""
+            }
+            ${
+              github
+                ? `<li><a href="https://github.com/${github}"><i class="fab fa-github"></i></a></li>`
+                : ""
+            }
+            ${
+              linkedin
+                ? `<li><a href="https://linkedin.com/${linkedin}"><i class="fab fa-linkedin"></i></a></li>`
+                : ""
+            }
+            ${
+              instagram
+                ? `<li><a href="https://instagram.com/${instagram}"><i class="fab fa-instagram"></i></a></li>`
+                : ""
+            }
           </ul>
         </div>
     `;
@@ -61,7 +94,7 @@ window.onload = function() {
     socialMediaPosition: "position-left",
     // social media usernames
     twitter: null,
-    github: "alesanchezr",
+    github: null,
     linkedin: null,
     instagram: null,
     name: null,
